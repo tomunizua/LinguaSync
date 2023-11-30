@@ -3,9 +3,9 @@ import requests
 RAPIDAPI_KEY = "3411873728mshf212de1e4166200p1be88ejsn1d9778ef5dea"
 
 def get_supported_languages():
-    url = "https://google-translate1.p.rapidapi.com/language/translate/v2/languages"
+    url = "https://google-translate113.p.rapidapi.com/api/v1/translator/support-languages"
     headers = {
-        "X-RapidAPI-Host": "google-translate1.p.rapidapi.com",
+        "X-RapidAPI-Host": "google-translate113.p.rapidapi.com",
         "X-RapidAPI-Key": RAPIDAPI_KEY,
     }
 
