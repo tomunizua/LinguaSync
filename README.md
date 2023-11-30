@@ -24,7 +24,7 @@ LinguaSync is a Command Line Language Tool that leverages the Google Translate A
   ```bash
   cd LinguaSync
   ```
-4. Install dependencies:
+3. Install dependencies:
   ```bash
     pip install requests
   ```
