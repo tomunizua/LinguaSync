@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import requests
 
 RAPIDAPI_KEY = "3411873728mshf212de1e4166200p1be88ejsn1d9778ef5dea"
@@ -13,10 +15,10 @@ def get_supported_languages():
     data = response.json()
 
     if response.status_code == 200:
-        return data['data']['languages']
+        return data if isinstance(data, list) else []  # Assuming languages are directly in the 'data' list
     else:
-        print(f"Failed to fetch supported languages. Status code: {response.status_code}")
-        print(f"Error message: {data['error']['message']}")
+        print("Failed to fetch supported languages. Status code: {}".format(response.status_code))
+        print("Error message: {}".format(data.get('message', 'Unknown error')))
         return []
 
 def detect_language(api_key, text):
@@ -32,12 +34,12 @@ def detect_language(api_key, text):
     data = response.json()
 
     if response.status_code == 200:
-        detected_language = data['language']
-        print(f"Detected Language: {detected_language}")
+        detected_language = data.get('language', 'N/A')
+        print("Detected Language: {}".format(detected_language))
         return detected_language
     else:
-        print(f"Failed to detect language. Status code: {response.status_code}")
-        print(f"Error message: {data['message']}")
+        print("Failed to detect language. Status code: {}".format(response.status_code))
+        print("Error message: {}".format(data.get('message', 'Unknown error')))
         return None
 
 def translate_text(api_key, from_lang, to_lang, text):
@@ -53,12 +55,12 @@ def translate_text(api_key, from_lang, to_lang, text):
     data = response.json()
 
     if response.status_code == 200:
-        translated_text = data['data']['translation']
-        print(f"Original Text: {text}")
-        print(f"Translated Text: {translated_text}")
+        translated_text = data.get('data', {}).get('translation', 'N/A')
+        print("Original Text: {}".format(text))
+        print("Translated Text: {}".format(translated_text))
     else:
-        print(f"Failed to translate text. Status code: {response.status_code}")
-        print(f"Error message: {data['message']}")
+        print("Failed to translate text. Status code: {}".format(response.status_code))
+        print("Error message: {}".format(data.get('message', 'Unknown error')))
 
 if __name__ == "__main__":
     print("Welcome to LinguaSync - Your Command Line Language Tool!")
@@ -68,8 +70,10 @@ if __name__ == "__main__":
 
     if supported_languages:
         print("Supported Languages:")
-        for lang_code, lang_name in supported_languages.items():
-            print(f"{lang_code}: {lang_name}")
+        for lang_info in supported_languages:
+            language_code = lang_info.get('language_code', 'N/A')
+            language_name = lang_info.get('language_name', 'N/A')
+            print("{}: {}".format(language_code, language_name))
 
         text_to_translate = input("Enter the text: ")
 
@@ -79,7 +83,7 @@ if __name__ == "__main__":
         if detected_language:
             target_language = input("Enter the target language code from the list above: ")
 
-            if target_language in supported_languages:
+            if any(lang_info.get('language_code') == target_language for lang_info in supported_languages):
                 # Translate the text
                 translate_text(RAPIDAPI_KEY, detected_language, target_language, text_to_translate)
             else:
