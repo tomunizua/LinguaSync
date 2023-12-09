@@ -151,7 +151,7 @@ def display_language_codes():
     print("{}: {}".format(code, name))
 
 def main():
-  print("Welcome to Teniola's Language Translation Tool!")
+  print("Welcome to Group19's Language Translation Tool!")
   print("Enter 'langs' to view the list of language codes.")
 
   source_lang = input("Enter the source language code (e.g., 'en' for English): ")
