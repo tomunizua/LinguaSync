@@ -21,11 +21,11 @@ def get_supported_languages():
         print("Error message: {}".format(data.get('message', 'Unknown error')))
         return []
 
-def detect_language(api_key, text):
+def detect_language(RAPIDAPI_KEY, text):
     url = "https://google-translate113.p.rapidapi.com/api/v1/translator/detect-language"
     headers = {
         "content-type": "application/x-www-form-urlencoded",
-        "X-RapidAPI-Key": api_key,
+        "X-RapidAPI-Key": RAPIDAPI_KEY,
         "X-RapidAPI-Host": "google-translate113.p.rapidapi.com"
     }
     payload = {"text": text}
@@ -69,13 +69,13 @@ if __name__ == "__main__":
     supported_languages = get_supported_languages()
 
     if supported_languages:
-        print("Supported Languages:")
+        print("Here is a list of our Supported Languages:")
         for lang_info in supported_languages:
             language_code = lang_info.get('language_code', 'N/A')
             language_name = lang_info.get('language_name', 'N/A')
             print("{}: {}".format(language_code, language_name))
 
-        text_to_translate = input("Enter the text: ")
+        text_to_translate = input("Enter your text for translation: ")
 
         # Detect the language
         detected_language = detect_language(RAPIDAPI_KEY, text_to_translate)

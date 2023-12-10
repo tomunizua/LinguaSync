@@ -18,32 +18,29 @@ def detect_language(api_key, text):
     detected_language = response.json()[0]['language']
     return detected_language
 
-def get_supported_languages(api_key):
+def get_supported_languages(RAPIDAPI_KEY):
     url = "https://microsoft-translator-text.p.rapidapi.com/languages"
     querystring = {"api-version": "3.0"}
     headers = {
-        "X-RapidAPI-Key": api_key,
+        "X-RapidAPI-Key": RAPIDAPI_KEY,
         "X-RapidAPI-Host": "microsoft-translator-text.p.rapidapi.com"
     }
     response = requests.get(url, headers=headers, params=querystring)
+    print(response.json())
 
     try:
-        response.raise_for_status()
+        response = requests.get(url, headers=headers, params=querystring)
+        response.raise_for_status()  # Raise an exception for 4xx or 5xx errors
+
         supported_languages = response.json()
-        return supported_languages.get('translation', {})
-    except json.JSONDecodeError:
-        print(f"Failed to parse JSON. Response content: {response.content}")
-        return {}
-    except requests.exceptions.HTTPError as errh:
-        print ("HTTP Error:", errh)
-    except requests.exceptions.ConnectionError as errc:
-        print ("Error Connecting:", errc)
-    except requests.exceptions.Timeout as errt:
-        print ("Timeout Error:", errt)
-    except requests.exceptions.RequestException as err:
-        print ("Something went wrong:", err)
-    return {}
-print("Before JSON Decode")
+        return supported_languages
+
+    except requests.exceptions.RequestException as e:
+     print(f"Failed to fetch supported languages. Error: {e}")
+     print(f"Response content: {response.content.decode('utf-8')}")
+    return None
+
+
 
 def translate_text(api_key, text, target_language):
     url = "https://microsoft-translator-text.p.rapidapi.com/translate"
@@ -64,13 +61,21 @@ if __name__ == "__main__":
     # Detect language
     text_to_translate = input("Enter your text for translation: ")
     detected_language = detect_language(RAPIDAPI_KEY, text_to_translate)
-    print(f'Detected Language Code: {detected_language}')
+    
+    # Fetch the language name using the detected language code
+    supported_languages = get_supported_languages(RAPIDAPI_KEY)
+    detected_language_name = supported_languages.get(detected_language, "Unknown")
+
+    print(f'Detected Language Code: {detected_language} ({detected_language_name})')
 
     # Get supported languages
     supported_languages = get_supported_languages(RAPIDAPI_KEY)
-    print("Supported Languages:")
+    if supported_languages:
+        print("Supported Languages:")
     for lang_code, lang_name in supported_languages.items():
         print(f"{lang_code}: {lang_name}")
+    else:
+        print("No supported languages available.")
 
     # Translate text
     target_language = input("Enter the target language code from the list above: ")
@@ -79,3 +84,4 @@ if __name__ == "__main__":
     else:
         translated_text = translate_text(RAPIDAPI_KEY, text_to_translate, target_language)
         print(f'Translated Text: {translated_text}')
+
