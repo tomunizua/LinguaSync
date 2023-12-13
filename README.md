@@ -1,10 +1,9 @@
 # LinguaSync
 
-LinguaSync is a Command Line Language Tool that leverages the Google Translate API to provide language detection and translation features. This tool is designed to be user-friendly and efficient for anyone working in a command-line environment.
+LinguaSync(Group19_Text_Translator.py) is a Command Line Language Tool which utilizes the RAPID API to translate text between different languages.This tool is designed to be user-friendly and efficient for anyone working in a command-line environment.
 
 ## Features
 
-- **Language Detection:** Automatically detects the language of the entered text.
 - **Translation:** Translates the detected language to the target language of your choice.
 
 ## Prerequisites
@@ -31,17 +30,17 @@ LinguaSync is a Command Line Language Tool that leverages the Google Translate A
 
 ## Usage
 
-1. Run the script:
-    ```bash
-    python lingua_sync.py
-    ```
-2. Follow the prompts to enter the text, detect the language, and choose a target language for translation.
-   
-3. View the translated text and detected language in the console.
+1. Run the script (e.g., python translator.py).
+2. Follow the prompts to enter:
+Source language code (e.g., en for English, fr for French)
+Target language code (e.g., es for Spanish, de for German)
+Text to translate
+
 
 ## Contributing
 Contributions are welcome! If you find a bug or have suggestions for improvements, please open an issue or create a pull request.
 
 ## Acknowledgments
-Thanks to Google Translate API and RapidAPI for providing language-related functionalities.
+Thanks to [Google Translate API](https://rapidapi.com/googlecloud/api/google-translate1) and RapidAPI for providing language-related functionalities.
+[Google Translate API](https://rapidapi.com/googlecloud/api/google-translate1)
 
