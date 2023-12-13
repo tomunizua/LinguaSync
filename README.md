@@ -1,3 +1,7 @@
+## Link to Demo Video
+
+[Watch the Demo Video here](https://www.loom.com/share/b8bff5a8e3af406ab8707a0738c3bd27?sid=3c025994-2332-4dc6-a79a-7482553d7566)
+
 # LinguaSync
 
 LinguaSync(Group19_Text_Translator.py) is a Command Line Language Tool which utilizes the RAPID API to translate text between different languages.This tool is designed to be user-friendly and efficient for anyone working in a command-line environment.
@@ -42,5 +46,7 @@ Contributions are welcome! If you find a bug or have suggestions for improvement
 
 ## Acknowledgments
 Thanks to [Google Translate API](https://rapidapi.com/googlecloud/api/google-translate1) and RapidAPI for providing language-related functionalities.
-[Google Translate API](https://rapidapi.com/googlecloud/api/google-translate1)
 
+## Link to Demo Video
+
+[Watch the Demo Video here](https://www.loom.com/share/b8bff5a8e3af406ab8707a0738c3bd27?sid=3c025994-2332-4dc6-a79a-7482553d7566)
