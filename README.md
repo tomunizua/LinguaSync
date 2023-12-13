@@ -34,7 +34,7 @@ LinguaSync(Group19_Text_Translator.py) is a Command Line Language Tool which uti
 
 ## Usage
 
-1. Run the script (e.g., python translator.py).
+1. Run the script (e.g., Group19_Text_Translator.py).
 2. Follow the prompts to enter:
 Source language code (e.g., en for English, fr for French)
 Target language code (e.g., es for Spanish, de for German)
